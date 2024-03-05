@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	if err := ebiten.RunGame(engine.New(1360/2, 768/2)); err != nil {
+	if err := ebiten.RunGame(engine.New(1920, 1080)); err != nil {
 		panic(err)
 	}
 }

@@ -73,9 +73,6 @@ func (g *Engine) Update() error {
 }
 
 func (g *Engine) Draw(screen *ebiten.Image) {
-	// make a single color image the size of the screen
-	// this is the background
-
 	g.Player.Draw(screen)
 }
 

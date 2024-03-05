@@ -30,58 +30,58 @@ func NewPlayer(image *ebiten.Image, position *phys.Vec2, speed float64) *Player 
 
 // Update updates the player
 func (p *Player) Update() {
-	p.Velocity = phys.NewVec2(0, 0)
-
-	if ebiten.IsKeyPressed(ebiten.KeyW) {
-		p.Velocity = p.Direction.Mul(-1).Mul(p.Speed)
-		p.Position = p.Position.Add(p.Velocity)
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyS) {
-		p.Velocity = p.Direction.Mul(1).Mul(p.Speed)
-		p.Position = p.Position.Add(p.Velocity)
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyA) {
-		p.Direction = p.Direction.Rotate(-0.1).Mul(p.Speed)
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyD) {
-		p.Direction = p.Direction.Rotate(0.1).Mul(p.Speed)
-	}
-
-	if p.Velocity.Mag() > 0 {
-		p.IsMoving = true
-	} else {
-		p.IsMoving = false
-	}
-
-	// p.Position = p.Position.Add(p.Velocity.Mul(p.Speed))
-
 	// p.Velocity = phys.NewVec2(0, 0)
 
 	// if ebiten.IsKeyPressed(ebiten.KeyW) {
-	// 	p.Velocity.Y -= 1
+	// 	p.Velocity = p.Direction.Mul(-1).Mul(p.Speed)
+	// 	p.Position = p.Position.Add(p.Velocity)
 	// }
 	// if ebiten.IsKeyPressed(ebiten.KeyS) {
-	// 	p.Velocity.Y += 1
+	// 	p.Velocity = p.Direction.Mul(1).Mul(p.Speed)
+	// 	p.Position = p.Position.Add(p.Velocity)
 	// }
 	// if ebiten.IsKeyPressed(ebiten.KeyA) {
-	// 	p.Velocity.X -= 1
+	// 	p.Direction = p.Direction.Rotate(-0.1).Mul(p.Speed)
 	// }
 	// if ebiten.IsKeyPressed(ebiten.KeyD) {
-	// 	p.Velocity.X += 1
+	// 	p.Direction = p.Direction.Rotate(0.1).Mul(p.Speed)
 	// }
 
 	// if p.Velocity.Mag() > 0 {
-	// 	p.Velocity = p.Velocity.Normalize()
-	// }
-
-	// p.Position = p.Position.Add(p.Velocity.Mul(p.Speed))
-
-	// if p.Velocity.Mag() > 0 {
-	// 	p.Direction = p.Velocity.Normalize()
 	// 	p.IsMoving = true
 	// } else {
 	// 	p.IsMoving = false
 	// }
+
+	p.Position = p.Position.Add(p.Velocity.Mul(p.Speed))
+
+	p.Velocity = phys.NewVec2(0, 0)
+
+	if ebiten.IsKeyPressed(ebiten.KeyW) {
+		p.Velocity.Y -= 1
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyS) {
+		p.Velocity.Y += 1
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyA) {
+		p.Velocity.X -= 1
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyD) {
+		p.Velocity.X += 1
+	}
+
+	if p.Velocity.Mag() > 0 {
+		p.Velocity = p.Velocity.Normalize()
+	}
+
+	p.Position = p.Position.Add(p.Velocity.Mul(p.Speed))
+
+	if p.Velocity.Mag() > 0 {
+		p.Direction = p.Velocity.Normalize()
+		p.IsMoving = true
+	} else {
+		p.IsMoving = false
+	}
 }
 
 // Draw draws the player

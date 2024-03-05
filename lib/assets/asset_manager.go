@@ -8,7 +8,8 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-//go:embed */*.png
+//go:embed tile/*/*.png
+//go:embed img/*.png
 var assets embed.FS
 
 func LoadImage(path string) *ebiten.Image {
